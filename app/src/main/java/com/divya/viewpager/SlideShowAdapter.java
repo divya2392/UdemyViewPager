@@ -2,6 +2,7 @@ package com.divya.viewpager;
 
 import android.content.Context;
 import android.media.Image;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,7 +47,7 @@ public class SlideShowAdapter extends PagerAdapter {
     }
 
     @Override
-    public Object instantiateItem(ViewGroup container, int position) {
+    public Object instantiateItem(ViewGroup container, final int position) {
 
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -54,6 +55,14 @@ public class SlideShowAdapter extends PagerAdapter {
 
         ImageView image = (ImageView)view.findViewById(R.id.imageView_id);
         image.setImageResource(images[position]);
+        image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Snackbar.make(view,"Image : "+(position+1),Snackbar.LENGTH_LONG).show();
+
+            }
+        });
         container.addView(view);
 
         return view;
